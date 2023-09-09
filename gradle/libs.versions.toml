@@ -8,25 +8,25 @@ iosTarget = "14.1"
 
 java = "17"
 
-kotlin = "1.8.20"
-agp = "8.0.2"
+kotlin = "1.8.22"
+agp = "8.1.0"
 
 androidx-appcompat = "1.6.1"
 androidx-core = "1.10.1"
-androidx-fragment = "1.5.5"
+androidx-fragment = "1.6.1"
 androidx-crypto = "1.1.0-alpha06"
 androidx-lifecycle = "2.6.1"
 
-google-material = "1.8.0"
+google-material = "1.9.0"
 
-compose = "1.4.0"
-android-compose-compiler = "1.4.6"
-androidx-activityCompose = "1.7.1"
-compose-uitooling = "1.4.0"
+compose = "1.5.0-beta01"
+android-compose-compiler = "1.4.8"
+androidx-activityCompose = "1.7.2"
+compose-uitooling = "1.4.3"
 
 napier = "2.6.1"
 
-kotlinx-coroutines = "1.7.0"
+kotlinx-coroutines = "1.7.3"
 kotlinx-serialization = "1.5.0"
 kotlinx-datetime = "0.4.0"
 
@@ -35,12 +35,14 @@ koin-android = "3.4.0"
 koin-annotations = "1.2.2"
 
 ktor = "2.3.0"
-sqlDelight = "1.5.5"
+sqlDelight = "2.0.0"
+sqlCipher = "4.5.4"
+sqliter = "1.2.3"
 
 moko-resources = "0.23.0"
 
 kmm-utils = "0.0.4"
-kmm-mvvm = "0.0.3"
+kmm-mvvm = "0.0.4"
 
 [plugins]
 
@@ -55,7 +57,7 @@ compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" 
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 
-sqlDelight = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 
 [libraries]
@@ -106,10 +108,12 @@ ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
 
-sqlDelight-core = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
-sqlDelight-extensions = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
-sqlDelight-driver-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
-sqlDelight-driver-ios = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlDelight-core = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+sqlDelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+sqlDelight-driver-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlCipher-android = { module = "net.zetetic:android-database-sqlcipher", version.ref = "sqlCipher" }
+sqliter-ios = { module = "co.touchlab:sqliter-driver", version.ref = "sqliter" }
 
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }

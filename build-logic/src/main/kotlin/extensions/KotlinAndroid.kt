@@ -1,5 +1,6 @@
 package extensions
 
+import com.android.build.api.dsl.AndroidResources
 import com.android.build.api.dsl.BuildFeatures
 import com.android.build.api.dsl.BuildType
 import com.android.build.api.dsl.CommonExtension
@@ -16,7 +17,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
  * Function for android configuring, logically this function is similar as "android" block in gradle file.
  */
 internal fun Project.androidOptions(
-    block: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor>.() -> Unit
+    block: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor, out AndroidResources>.() -> Unit
 ) {
     androidExtension.apply {
         block()
@@ -26,11 +27,11 @@ internal fun Project.androidOptions(
 /**
  * Function for configuring a base Kotlin with Android options
  */
-internal fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+internal fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
 
-private val Project.androidExtension: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor>
+private val Project.androidExtension: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor, out AndroidResources>
     get() = extensions.findByType(BaseAppModuleExtension::class)
         ?: requireNotNull(extensions.findByType(LibraryExtension::class)) {
             "\"Project.androidExtension\" value may be called only from android application" +

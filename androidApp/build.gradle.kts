@@ -5,11 +5,16 @@ plugins {
 
 kotlin {
     sourceSets {
+        commonMain {
+            dependencies {
+                implementation(project(":mvi-core"))
+                implementation(libs.koin.core)
+            }
+        }
+        
         androidMain {
             dependencies {
-                implementation(project(":core:datasource:network"))
-                implementation(project(":core:datasource:local-database"))
-                implementation(project(":resources:translations"))
+                implementation(project(":mvi-android-mvvm"))
                 implementation(libs.bundles.android.feature.compose)
                 implementation(libs.kmm.utils)
             }
