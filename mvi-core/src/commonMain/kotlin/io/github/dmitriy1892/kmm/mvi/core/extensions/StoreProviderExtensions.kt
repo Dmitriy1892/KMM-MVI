@@ -1,18 +1,10 @@
 package io.github.dmitriy1892.kmm.mvi.core.extensions
 
-import io.github.dmitriy1892.kmm.utils.coroutines.WrappedFlow
-import io.github.dmitriy1892.kmm.utils.coroutines.WrappedStateFlow
 import io.github.dmitriy1892.kmm.mvi.core.Store
 import io.github.dmitriy1892.kmm.mvi.core.StoreProvider
 import io.github.dmitriy1892.kmm.mvi.core.annotation.KmmMviDsl
 import io.github.dmitriy1892.kmm.mvi.core.model.StoreContext
 import kotlinx.coroutines.Job
-
-val <State: Any, SideEffect: Any> StoreProvider<State, SideEffect>.stateFlow: WrappedStateFlow<State>
-    get() = this.store.stateFlow
-
-val <State: Any, SideEffect: Any> StoreProvider<State, SideEffect>.sideEffectFlow: WrappedFlow<SideEffect>
-    get() = this.store.sideEffectFlow
 
 /**
  * DSL function for processing a user intent.

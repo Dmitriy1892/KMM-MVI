@@ -19,7 +19,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":mvi-core"))
+
+                implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kmm.mvvm.core)
+                api(libs.kmm.utils)
             }
         }
 

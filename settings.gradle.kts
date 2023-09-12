@@ -23,3 +23,5 @@ include(":androidApp")
 include(":mvi-core")
 include(":mvi-kmm-mvvm")
 include(":mvi-android-mvvm")
+
+include(":sample")

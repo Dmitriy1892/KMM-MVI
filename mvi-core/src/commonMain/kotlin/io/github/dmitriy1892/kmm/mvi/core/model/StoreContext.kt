@@ -2,7 +2,7 @@ package io.github.dmitriy1892.kmm.mvi.core.model
 
 /**
  * Class for providing a set of functions
- * for [io.github.dmitriy1892.mvi.core.Store]'s [SideEffect]s sending,
+ * for [io.github.dmitriy1892.kmm.mvi.core.Store]'s [SideEffect]s sending,
  * [State] getting and transformation.
  */
 class StoreContext<State: Any, SideEffect: Any>(
@@ -11,6 +11,11 @@ class StoreContext<State: Any, SideEffect: Any>(
     val reduceState: suspend ((State) -> State) -> Unit
 ) {
 
+    /**
+     * Value with current [State].
+     *
+     * WARNING: Don't use it inside [reduceState] function.
+     */
     val state: State
         get() = getState()
 }

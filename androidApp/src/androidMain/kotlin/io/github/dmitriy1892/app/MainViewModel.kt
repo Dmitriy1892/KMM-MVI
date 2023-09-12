@@ -5,35 +5,40 @@ import io.github.dmitriy1892.kmm.mvi.android.mvvm.store
 import io.github.dmitriy1892.kmm.mvi.core.Store
 import io.github.dmitriy1892.kmm.mvi.core.StoreProvider
 import io.github.dmitriy1892.kmm.mvi.core.extensions.intent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel(), StoreProvider<MainState, MainSideEffect> {
 
     override val store: Store<MainState, MainSideEffect> = store(MainState(0))
 
-    fun incrementId(newId: Int) = intent {
-        sendSideEffect(MainSideEffect.StartLoadingToast)
+    fun incrementValue(incrementValue: Int) = intent {
+        sendSideEffect(MainSideEffect.ShowIncrementStarted)
 
-        reduceState { state -> state.copy(isLoading = true) }
+        reduceState { state -> state.copy(isProgress = true) }
 
-        delay(3000)
+        withContext(Dispatchers.IO) { delay(5000) }
 
-        reduceState { state -> state.copy(id = newId, isLoading = false) }
+        reduceState { state ->
+            state.copy(
+                currentValue = state.currentValue + incrementValue,
+                isProgress = false
+            )
+        }
 
-        println("State: $state")
-
-        sendSideEffect(MainSideEffect.EndLoadingToast)
+        sendSideEffect(MainSideEffect.ShowIncrementFinished)
     }
 }
 
 data class MainState(
-    val id: Int,
-    val isLoading: Boolean = false
+    val currentValue: Int = 0,
+    val isProgress: Boolean = false
 )
 
 sealed interface MainSideEffect {
 
-    object StartLoadingToast : MainSideEffect
+    object ShowIncrementStarted : MainSideEffect
 
-    object EndLoadingToast : MainSideEffect
+    object ShowIncrementFinished : MainSideEffect
 }

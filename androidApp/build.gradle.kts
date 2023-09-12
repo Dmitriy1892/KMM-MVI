@@ -1,3 +1,6 @@
+import extensions.getApplicationVersionCode
+import extensions.getApplicationVersionName
+
 plugins {
     id("android-application-convention")
     id("android-base-compose-convention")
@@ -5,18 +8,15 @@ plugins {
 
 kotlin {
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(project(":mvi-core"))
-                implementation(libs.koin.core)
-            }
-        }
-        
         androidMain {
             dependencies {
+                implementation(project(":sample"))
+                implementation(project(":mvi-core"))
                 implementation(project(":mvi-android-mvvm"))
-                implementation(libs.bundles.android.feature.compose)
-                implementation(libs.kmm.utils)
+                implementation(project(":mvi-kmm-mvvm"))
+
+                implementation(libs.bundles.androidApp)
+                implementation(libs.kmm.mvvm.core)
             }
         }
     }
@@ -27,6 +27,9 @@ android {
 
     defaultConfig {
         applicationId = "io.github.dmitriy1892.app"
+
+        versionCode = getApplicationVersionCode()
+        versionName = getApplicationVersionName()
     }
 
     buildTypes {
