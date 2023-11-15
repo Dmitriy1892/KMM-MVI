@@ -2,7 +2,7 @@ package io.github.dmitriy1892.kmm.mvi.sample
 
 import io.github.dmitriy1892.kmm.mvi.core.extensions.intent
 import io.github.dmitriy1892.kmm.mvi.kmm.mvvm.MviViewModel
-import io.github.dmitriy1892.kmm.utils.coroutines.CoroutineDispatcherProviderImpl
+import io.github.dmitriy1892.kmm.utils.coroutines.dispatcher.CoroutineDispatcherProviderImpl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 

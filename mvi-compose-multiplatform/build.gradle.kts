@@ -1,7 +1,7 @@
 import extensions.getMyLibraryVersion
 
 plugins {
-    id("multiplatform-library-convention")
+    id("multiplatform-compose-setup")
 
     id("publication-settings")
     id("maven-publish")
@@ -18,16 +18,15 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":mvi-core"))
-            implementation(libs.kotlinx.coroutines.core)
-            api(libs.kmm.utils)
+            api(libs.decompose.essenty.lifecycle)
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.bundles.android.feature.compose)
         }
     }
 }
 
 android {
-    namespace = "io.github.dmitriy1892.kmm.mvi.android.mvvm"
+    namespace = "io.github.dmitriy1892.kmm.mvi.compose.multiplatform"
 }

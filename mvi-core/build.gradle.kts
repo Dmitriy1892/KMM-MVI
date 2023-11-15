@@ -12,16 +12,14 @@ group = "io.github.dmitriy1892.kmm"
 version = getMyLibraryVersion()
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.kotlinx.coroutines.core)
-                api(libs.kmm.utils)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+            api(libs.kmm.utils)
         }
     }
 }

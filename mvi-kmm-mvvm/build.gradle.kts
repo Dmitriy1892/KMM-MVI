@@ -11,25 +11,21 @@ group = "io.github.dmitriy1892.kmm"
 version = getMyLibraryVersion()
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(project(":mvi-core"))
+        commonMain.dependencies {
+            implementation(project(":mvi-core"))
 
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kmm.mvvm.core)
-                api(libs.kmm.utils)
-            }
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kmm.mvvm.core)
+            api(libs.kmm.utils)
         }
 
-        androidMain {
-            dependencies {
-                implementation(libs.androidx.lifecycle.viewmodel)
-            }
+        androidMain.dependencies {
+            implementation(libs.androidx.lifecycle.viewmodel)
         }
     }
 }

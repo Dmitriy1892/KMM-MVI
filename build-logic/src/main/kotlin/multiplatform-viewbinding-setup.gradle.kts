@@ -7,16 +7,12 @@ plugins {
 
 kotlin {
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.bundles.common.feature)
-            }
+        commonMain.dependencies {
+            implementation(libs.bundles.common.feature)
         }
 
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.bundles.android.feature.view)
-            }
+        androidMain.dependencies {
+            implementation(libs.bundles.android.feature.view)
         }
     }
 }

@@ -8,16 +8,14 @@ plugins {
 
 kotlin {
     sourceSets {
-        androidMain {
-            dependencies {
-                implementation(project(":sample"))
-                implementation(project(":mvi-core"))
-                implementation(project(":mvi-android-mvvm"))
-                implementation(project(":mvi-kmm-mvvm"))
+        androidMain.dependencies {
+            implementation(project(":sample"))
+            implementation(project(":mvi-core"))
+            implementation(project(":mvi-android-mvvm"))
+            implementation(project(":mvi-kmm-mvvm"))
 
-                implementation(libs.bundles.androidApp)
-                implementation(libs.kmm.mvvm.core)
-            }
+            implementation(libs.bundles.androidApp)
+            implementation(libs.kmm.mvvm.core)
         }
     }
 }

@@ -1,9 +1,9 @@
 package io.github.dmitriy1892.kmm.mvi.core
 
-import io.github.dmitriy1892.kmm.utils.coroutines.WrappedFlow
-import io.github.dmitriy1892.kmm.utils.coroutines.WrappedStateFlow
 import io.github.dmitriy1892.kmm.mvi.core.model.StoreConfig
 import io.github.dmitriy1892.kmm.mvi.core.model.StoreContext
+import io.github.dmitriy1892.kmm.utils.coroutines.flow.WrappedSharedFlow
+import io.github.dmitriy1892.kmm.utils.coroutines.flow.WrappedStateFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 
@@ -40,18 +40,10 @@ interface Store<State: Any, SideEffect: Any> {
     /**
      * [Store] output point.
      *
-     * [WrappedFlow] with [SideEffect]'s - used for one-shot events, i.e. alerts/dialogs displaying,
+     * [WrappedSharedFlow] with [SideEffect]'s - used for one-shot events, i.e. alerts/dialogs displaying,
      * navigation events, etc.
-     *
-     * Strongly recommend to configure an internal mutable representation of this value
-     * using defined [config] [StoreConfig.sideEffectBufferSize], for example:
-     * ```
-     * private val sideEffectChannel = Channel(config.sideEffectBufferSize)
-     * override val sideEffectFlow: WrappedFlow<SideEffect>
-     *     get() = sideEffectChannel.receiveAsFlow().asWrappedFlow()
-     * ```
      */
-    val sideEffectFlow: WrappedFlow<SideEffect>
+    val sideEffectFlow: WrappedSharedFlow<SideEffect>
 
     /**
      * [Store] input point.

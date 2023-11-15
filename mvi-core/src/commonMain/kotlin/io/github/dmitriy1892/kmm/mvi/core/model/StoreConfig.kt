@@ -7,11 +7,9 @@ import kotlinx.coroutines.channels.Channel
 
 /**
  * StoreConfig - class with [io.github.dmitriy1892.kmm.mvi.core.Store] configuration.
- * Used for [io.github.dmitriy1892.kmm.mvi.core.Store.scope]
- * and [io.github.dmitriy1892.kmm.mvi.core.Store.sideEffectFlow] configuring.
+ * Used for [io.github.dmitriy1892.kmm.mvi.core.Store.scope] configuring.
  */
 data class StoreConfig(
-    val sideEffectBufferSize: Int = Channel.BUFFERED,
-    val eventsDispatcher: CoroutineDispatcher = Dispatchers.Unconfined,
+    val eventsDispatcher: CoroutineDispatcher = Dispatchers.Main.immediate,
     val exceptionHandler: CoroutineExceptionHandler? = null
 )
