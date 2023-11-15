@@ -6,7 +6,7 @@ import io.github.dmitriy1892.kmm.mvi.core.Store
 import io.github.dmitriy1892.kmm.mvi.core.StoreProvider
 import io.github.dmitriy1892.kmm.mvi.core.annotation.KmmMviDsl
 import io.github.dmitriy1892.kmm.mvi.core.extensions.store
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @KmmMviDsl
@@ -16,5 +16,5 @@ fun <State: Any, SideEffect: Any> ViewModel.store(initialState: State): Store<St
 val <State: Any, SideEffect: Any> StoreProvider<State, SideEffect>.stateFlow: StateFlow<State>
     get() = this.store.stateFlow
 
-val <State: Any, SideEffect: Any> StoreProvider<State, SideEffect>.sideEffectFlow: Flow<SideEffect>
+val <State: Any, SideEffect: Any> StoreProvider<State, SideEffect>.sideEffectFlow: SharedFlow<SideEffect>
     get() = this.store.sideEffectFlow

@@ -43,8 +43,8 @@ sqliter = "1.2.3"
 
 moko-resources = "0.23.0"
 
-kmm-utils = "0.0.5"
-kmm-mvvm = "0.0.6"
+kmm-utils = "0.0.6"
+kmm-mvvm = "0.0.7"
 
 [plugins]
 

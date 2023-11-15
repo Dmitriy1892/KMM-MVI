@@ -8,7 +8,6 @@ import io.github.dmitriy1892.kmm.mvi.core.model.StoreContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * Create a new store based on [CoroutineScope].

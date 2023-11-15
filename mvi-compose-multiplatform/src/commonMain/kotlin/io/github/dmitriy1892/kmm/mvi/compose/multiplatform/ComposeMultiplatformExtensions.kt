@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
-import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.flowWithEssentyLifecycle
-import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.repeatOnEssentyLifecycle
+import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.flowWithLifecycle
+import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.repeatOnLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -30,12 +30,12 @@ val LocalLifecycleOwner = compositionLocalOf<LifecycleOwner> { error("No Lifecyc
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 @Composable
-fun <T> StateFlow<T>.collectAsStateWithEssentyLifecycle(
+fun <T> StateFlow<T>.collectAsStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext
-): State<T> = collectAsStateWithEssentyLifecycle(
-    initialValue = this.value,
+): State<T> = collectAsStateWithLifecycle(
+    initialValue = value,
     lifecycleOwner = lifecycleOwner,
     minActiveState = minActiveState,
     context = context
@@ -44,18 +44,18 @@ fun <T> StateFlow<T>.collectAsStateWithEssentyLifecycle(
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 @Composable
-fun <T> Flow<T>.collectAsStateWithEssentyLifecycle(
+fun <T> Flow<T>.collectAsStateWithLifecycle(
     initialValue: T,
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext
 ): State<T> {
     return produceState(initialValue, this, lifecycleOwner, minActiveState, context) {
-        lifecycleOwner.lifecycle.repeatOnEssentyLifecycle(minActiveState) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
             if (context == EmptyCoroutineContext) {
-                this@collectAsStateWithEssentyLifecycle.collect { this@produceState.value = it }
+                this@collectAsStateWithLifecycle.collect { this@produceState.value = it }
             } else withContext(context) {
-                this@collectAsStateWithEssentyLifecycle.collect { this@produceState.value = it }
+                this@collectAsStateWithLifecycle.collect { this@produceState.value = it }
             }
         }
     }
@@ -64,15 +64,15 @@ fun <T> Flow<T>.collectAsStateWithEssentyLifecycle(
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
 @Composable
-fun <T> Flow<T>.collectSideEffectWithEssentyLifecycle(
+fun <T> Flow<T>.collectSideEffectWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     onEach: @Composable (T) -> Unit
 ) {
     var sideEffect by remember { mutableStateOf<T?>(null) }
 
     LaunchedEffect(null) {
-        this@collectSideEffectWithEssentyLifecycle
-            .flowWithEssentyLifecycle(lifecycleOwner.lifecycle)
+        this@collectSideEffectWithLifecycle
+            .flowWithLifecycle(lifecycleOwner.lifecycle)
             .onEach {
                 sideEffect = it
             }
