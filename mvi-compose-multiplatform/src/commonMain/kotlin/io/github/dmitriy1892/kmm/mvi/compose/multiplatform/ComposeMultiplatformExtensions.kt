@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
-import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.flowWithLifecycle
 import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.repeatOnLifecycle
+import io.github.dmitriy1892.kmm.mvi.compose.multiplatform.essenty.withLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -25,7 +25,9 @@ import kotlin.native.HiddenFromObjC
 
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
-val LocalLifecycleOwner = compositionLocalOf<LifecycleOwner> { error("No LifecycleOwner state provided") }
+val LocalLifecycleOwner = compositionLocalOf<LifecycleOwner> {
+    error("No LifecycleOwner state provided")
+}
 
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
@@ -72,7 +74,7 @@ fun <T> Flow<T>.collectSideEffectWithLifecycle(
 
     LaunchedEffect(null) {
         this@collectSideEffectWithLifecycle
-            .flowWithLifecycle(lifecycleOwner.lifecycle)
+            .withLifecycle(lifecycleOwner.lifecycle)
             .onEach {
                 sideEffect = it
             }
